@@ -22,6 +22,7 @@
 ```
 src/                      ← 待审查的源代码
 tests/                    ← 测试代码
+docs/09_test_report.md    ← 测试报告（确认测试通过）
 docs/02_architecture.md   ← 架构设计（对照标准）
 docs/04_api.md            ← API 设计（对照标准）
 .ai/rules/coding_rules.md ← 编码规范

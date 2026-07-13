@@ -18,9 +18,10 @@
 03_database.md       ← 数据库设计（Architect 维护）
 04_api.md            ← API 设计（Architect 维护）
 05_ui.md             ← UI 设计（PM/Designer 维护）
-06_tasks.md          ← 任务清单（Developer 维护）
+06_tasks.md          ← 任务清单（全员可更新）
 07_decisions.md      ← 决策记录（全员可追加）
-08_review.md         ← 审查报告（Reviewer/Tester 维护）
+08_review.md         ← 审查报告（Reviewer 维护）
+09_test_report.md    ← 测试报告（Tester 维护）
 CHANGELOG.md         ← 变更日志（Developer 维护）
 ```
 
@@ -28,7 +29,9 @@ CHANGELOG.md         ← 变更日志（Developer 维护）
 
 - 00-05 为设计阶段文档，编号反映流程顺序
 - 06-08 为执行阶段文档
-- 编号一旦确定不再变更
+- 09 为测试阶段文档
+- 编号一经确定，在项目生命周期内尽量保持稳定；如因文档拆分或合并需要调整，须在 07_decisions.md 中记录变更原因和影响
+- 06_tasks.md 维护者为全员可更新，其中项目状态区块由当前阶段负责角色更新
 
 ---
 
@@ -115,6 +118,8 @@ CHANGELOG.md         ← 变更日志（Developer 维护）
 - 优先级：[P0 | P1 | P2 | P3]
 - 负责角色：[角色名]
 - 关联需求：PRD 章节 / DEC-XXX
+- 估算：[人时/天数]
+- 依赖关系：[TASK-XXX | 无]
 - 描述：
 - 验收标准：
 ```

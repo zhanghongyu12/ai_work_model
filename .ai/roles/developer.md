@@ -12,6 +12,7 @@
 - 根据架构文档实现代码
 - 编写单元测试和集成测试
 - 修复 Bug
+- 构建、部署、基础监控
 - 更新任务状态 (docs/06_tasks.md)
 - 更新 CHANGELOG
 
@@ -23,6 +24,7 @@
 docs/02_architecture.md   ← 系统架构设计
 docs/03_database.md       ← 数据库设计
 docs/04_api.md            ← API 设计
+docs/05_ui.md             ← UI 设计
 docs/06_tasks.md          ← 任务清单
 .ai/rules/coding_rules.md ← 编码规范
 ```

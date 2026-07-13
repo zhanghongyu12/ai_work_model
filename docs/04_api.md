@@ -23,6 +23,32 @@
 }
 ```
 
+### 错误响应格式
+
+```json
+{
+  "code": 400,
+  "message": "参数校验失败",
+  "errors": [
+    {
+      "field": "username",
+      "message": "用户名不能为空"
+    }
+  ],
+  "trace_id": "req_xxxxxxxxxxxx"
+}
+```
+
+- `errors`：详细错误数组，每个元素包含字段名和错误信息
+- `trace_id`：请求追踪 ID，用于问题排查
+
+### API 版本策略
+
+<!-- 版本号规则：URL 路径（/api/v1/）或 Header（Accept: application/vnd.api+json;version=1） -->
+- 当前版本：
+- 兼容策略：
+- 废弃流程：
+
 ### 状态码定义
 
 | 状态码 | 含义 |

@@ -11,6 +11,8 @@
 
 ## 快速开始
 
+> 项目当前状态详见 `docs/06_tasks.md` 顶部"项目状态"区块。
+
 ### 作为新项目使用
 
 1. 复制本模板目录作为新项目根目录
@@ -21,6 +23,7 @@
 ### 作为 AI 接手现有项目
 
 1. 阅读 `README.md`（本文件）了解项目背景与状态
+2. 检查项目当前状态（`docs/06_tasks.md` 顶部"项目状态"区块）
 3. 阅读 `.ai/workflow.md` 了解工作流程
 4. 确认你的角色，阅读 `.ai/roles/<角色>.md`
 5. 阅读相关 `.ai/rules/` 规则文件
@@ -54,6 +57,7 @@
 │   ├── 06_tasks.md        ← 任务清单
 │   ├── 07_decisions.md    ← 决策记录
 │   ├── 08_review.md       ← 审查报告
+│   ├── 09_test_report.md  ← 测试报告
 │   └── CHANGELOG.md       ← 变更日志
 ├── src/                   ← 源代码
 ├── tests/                 ← 测试代码
@@ -68,7 +72,7 @@
 | Architect (架构师) | 技术方案、系统设计 | 02_architecture.md, 03_database.md, 04_api.md |
 | Developer (开发) | 编码、测试、修 Bug | src/, tests/, 06_tasks.md |
 | Reviewer (审查) | 代码质量审查 | 08_review.md |
-| Tester (测试) | 测试方案、用例 | tests/, 08_review.md |
+| Tester (测试) | 测试方案、用例 | tests/, 09_test_report.md |
 
 ## 工作流程
 

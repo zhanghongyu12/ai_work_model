@@ -34,7 +34,15 @@
 
 ## 决策列表
 
-（暂无）
+## DEC-001: 拆分 08_review.md 为审查报告和测试报告
+
+- 日期：2026-07-13
+- 决定：将 `docs/08_review.md` 拆分为 `docs/08_review.md`（Reviewer 代码审查报告）和 `docs/09_test_report.md`（Tester 测试报告）
+- 原因：原文件同时包含 Reviewer 的代码审查报告和 Tester 的测试报告，两个角色共同维护同一文件导致职责边界模糊，违反 SRP 原则
+- 影响：reviewer.md 输出文档改为 08_review.md（审查部分），tester.md 输出文档改为 09_test_report.md，document_rules.md 编号表已同步更新
+- 替代方案：保持 08_review.md 不拆分，通过章节区分——但无法解决两个角色同时修改同一文件的冲突问题
+- 最终选择：拆分为两个独立文件
+- 状态：已确认
 
 ---
 
