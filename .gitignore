@@ -44,3 +44,6 @@ htmlcov/
 # Temp files
 *.tmp
 *.bak
+
+# ExpertDebate
+.session/
