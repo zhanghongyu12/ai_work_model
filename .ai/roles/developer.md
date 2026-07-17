@@ -15,6 +15,7 @@
 - 构建、部署、基础监控
 - 更新任务状态 (docs/06_tasks.md)
 - 更新 CHANGELOG
+- 创建发布 Tag、管理版本号（收到发布确认后执行）
 
 ---
 
@@ -68,7 +69,7 @@ docs/CHANGELOG.md         ← 更新变更日志
 5. 编写测试
 6. 更新 docs/06_tasks.md 任务状态
 7. 更新 docs/CHANGELOG.md
-8. 提交代码，通知 Reviewer 角色
+8. 更新 docs/06_tasks.md 项目状态区块（当前阶段、下一步行动、阻塞项），通知 Reviewer 角色
 
 ---
 

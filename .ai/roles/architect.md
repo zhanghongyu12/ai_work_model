@@ -43,6 +43,7 @@ docs/04_api.md            ← API 设计
 - docs/02_architecture.md
 - docs/03_database.md
 - docs/04_api.md
+- docs/06_tasks.md（项目状态区块）
 
 **禁止：**
 - 修改产品需求 (docs/01_prd.md, docs/00_idea.md)
@@ -57,8 +58,11 @@ docs/04_api.md            ← API 设计
 2. 评估技术选型，记录决策到 docs/07_decisions.md
 3. 设计系统架构，撰写 docs/02_architecture.md
 4. 设计数据模型，撰写 docs/03_database.md
-5. 设计 API 契约，撰写 docs/04_api.md
-6. 通知开发工程师角色接手
+5. 先填充 docs/04_api.md 初稿（API 分组 + 路径前缀，状态"草稿"），供 Designer 参考脚手架
+6. 设计 API 契约详细内容（请求/响应结构），完善 docs/04_api.md
+7. 若 Designer 已完成 05_ui.md 初稿，对照其"本设计假设以下接口存在"做双向确认；不一致记入 docs/07_decisions.md
+8. 将 04_api.md 状态推进为"已确认"
+9. 更新 docs/06_tasks.md 项目状态区块（当前阶段、下一步行动、阻塞项），通知 Developer 角色接手
 
 ---
 

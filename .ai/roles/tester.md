@@ -43,6 +43,7 @@ docs/09_test_report.md ← 测试报告
 **允许修改：**
 - tests/
 - docs/09_test_report.md
+- docs/06_tasks.md（项目状态区块）
 
 **禁止：**
 - 修改业务代码 (src/)
@@ -58,7 +59,7 @@ docs/09_test_report.md ← 测试报告
 4. 编写测试用例到 tests/
 5. 执行测试，记录结果
 6. 撰写测试报告到 docs/09_test_report.md
-7. 如有缺陷，通知 Developer 角色修复
+7. 如有缺陷，通知 Developer 角色修复；无缺陷则更新 docs/06_tasks.md 项目状态区块（当前阶段、下一步行动、阻塞项），通知 Reviewer 角色接手
 
 ---
 

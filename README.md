@@ -6,7 +6,7 @@
 
 ## 这是什么
 
-这是一个项目模板，定义了多个 AI 角色（产品经理、架构师、开发、审查、测试）的职责边界、协作规则和文档体系。
+这是一个项目模板，定义了多个 AI 角色（产品经理、架构师、设计师、开发、审查、测试）的职责边界、协作规则和文档体系。
 任何 AI 工具（ChatGPT、Claude Code、Codex、Qoder、DeepSeek 等）都可以基于这套文件体系无缝接手工作。
 
 ## 快速开始
@@ -39,6 +39,7 @@
 │   ├── roles/             ← 角色定义
 │   │   ├── pm.md
 │   │   ├── architect.md
+│   │   ├── designer.md
 │   │   ├── developer.md
 │   │   ├── reviewer.md
 │   │   └── tester.md
@@ -70,6 +71,7 @@
 |------|------|---------|
 | PM (产品经理) | 需求分析、PRD | 00_idea.md, 01_prd.md |
 | Architect (架构师) | 技术方案、系统设计 | 02_architecture.md, 03_database.md, 04_api.md |
+| Designer (设计师) | 界面设计、交互设计 | 05_ui.md |
 | Developer (开发) | 编码、测试、修 Bug | src/, tests/, 06_tasks.md |
 | Reviewer (审查) | 代码质量审查 | 08_review.md |
 | Tester (测试) | 测试方案、用例 | tests/, 09_test_report.md |
@@ -83,13 +85,70 @@
 
 ## 支持的 AI 工具
 
-| 工具 | 适合角色 | 说明 |
-|------|---------|------|
-| ChatGPT | PM / Architect | 产品设计、方案讨论、技术评审 |
-| Claude Code | Developer | 主要编码和工程实现 |
-| Codex | Developer | 代码开发和自动化任务 |
-| Qoder | Developer | IDE 集成开发 |
-| DeepSeek / GLM | Reviewer / Tester | 低成本分析、Review、第二意见 |
+> 以下为 2026 年 7 月国产模型最新版本推荐，按角色列出前三名。
+> 工具不限，支持多模型切换的编程工具（如 Qoder、Trae、Claude Code + 国产 API）均可按阶段切模型。
+
+### PM（产品经理）
+
+| 排名 | 模型 | 推荐理由 |
+|------|------|---------|
+| 1 | Kimi K2.6 | 超长上下文，一次吃进想法 + 竞品资料，文档结构化能力最强 |
+| 2 | GLM-5 | 全模态旗舰，语言表达和文档质量稳定 |
+| 3 | Qwen3.7-Max | Agentic 旗舰，通用表达强，需求场景推演能力突出 |
+
+### Architect（架构师）
+
+| 排名 | 模型 | 推荐理由 |
+|------|------|---------|
+| 1 | Kimi K2.6 | 长上下文对照 PRD + 架构 + 数据库 + API 多份文档，综合决策最佳 |
+| 2 | DeepSeek-V4 | V4 长上下文效率大幅提升，技术选型推理链路深 |
+| 3 | Qwen3.7-Max | "从说得好到做得到"的 Agentic 基座，系统设计落地性强 |
+
+### Designer（设计师）
+
+| 排名 | 模型 | 推荐理由 |
+|------|------|---------|
+| 1 | GLM-5 | 全模态旗舰，可处理视觉参考素材，文档结构化输出稳定 |
+| 2 | Kimi K2.6 | 超长上下文，一次吃进 PRD + 竞品界面，页面规划能力强 |
+| 3 | Qwen3.7-Max | Agentic 旗舰，用户场景推演和交互流程设计能力强 |
+
+### Developer（开发）
+
+| 排名 | 模型 | 推荐理由 |
+|------|------|---------|
+| 1 | Qwen3.6-Plus | 国产编码新王，编程能力接近 Claude Sonnet，日常主力 |
+| 2 | GLM-5.1 | 代码能力大增，支持长程自主工作 8 小时，适合复杂长任务 |
+| 3 | DeepSeek-V4 | 编码 + 长上下文兼顾，性价比最高，适合批量实现 |
+
+### Reviewer（审查）
+
+| 排名 | 模型 | 推荐理由 |
+|------|------|---------|
+| 1 | GLM-5.1 | 代码审查 + 长程分析，能持续自主工作，安全/性能隐患最敏锐 |
+| 2 | DeepSeek-V4 | 深度推理审查，架构一致性检查强 |
+| 3 | Kimi K2.6 | 适合做交叉审查第二意见，对冲单一模型盲区 |
+
+### Tester（测试）
+
+| 排名 | 模型 | 推荐理由 |
+|------|------|---------|
+| 1 | DeepSeek-V4 | 测试用例覆盖全面，性价比高，适合批量铺用例 |
+| 2 | Qwen3.6-Plus | 编码能力强，测试代码质量高 |
+| 3 | 豆包 2.0-Code | 字节编码模型，批量生成测试用例效率高 |
+
+### 模型速查总表
+
+| 角色 | 首选 | 第二 | 第三 |
+|------|------|------|------|
+| PM | Kimi K2.6 | GLM-5 | Qwen3.7-Max |
+| Architect | Kimi K2.6 | DeepSeek-V4 | Qwen3.7-Max |
+| Designer | GLM-5 | Kimi K2.6 | Qwen3.7-Max |
+| Developer | Qwen3.6-Plus | GLM-5.1 | DeepSeek-V4 |
+| Reviewer | GLM-5.1 | DeepSeek-V4 | Kimi K2.6 |
+| Tester | DeepSeek-V4 | Qwen3.6-Plus | 豆包 2.0-Code |
+
+> **选型建议**：如果全程只用一个模型，DeepSeek-V4 编码 + 推理 + 长上下文兼顾，可跑完全流程；Review 阶段临时调 GLM-5.1 做关键审查即可。
+> **双模型交叉审查**：配合 `.ai/rules/ExpertDebate` 机制，用 GLM-5.1 + DeepSeek-V4 分别审查，取交集问题必修，单模型独有作为参考项。
 
 ## 核心原则
 

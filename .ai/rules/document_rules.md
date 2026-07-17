@@ -17,7 +17,7 @@
 02_architecture.md   ← 系统架构设计（Architect 维护）
 03_database.md       ← 数据库设计（Architect 维护）
 04_api.md            ← API 设计（Architect 维护）
-05_ui.md             ← UI 设计（PM/Designer 维护）
+05_ui.md             ← UI 设计（Designer 维护）
 06_tasks.md          ← 任务清单（全员可更新）
 07_decisions.md      ← 决策记录（全员可追加）
 08_review.md         ← 审查报告（Reviewer 维护）

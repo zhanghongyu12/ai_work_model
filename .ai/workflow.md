@@ -42,7 +42,7 @@
 
 ### 阶段 4: UI 设计
 
-- **角色**: PM / Designer
+- **角色**: Designer
 - **输入**: `docs/01_prd.md`
 - **输出**: `docs/05_ui.md`
 - **规则**: 可与阶段 3 并行
@@ -51,17 +51,17 @@
 
 ### 阶段 5: 任务拆分
 
-- **角色**: Architect → Developer
-- **输入**: `docs/02_architecture.md`、`docs/04_api.md`
+- **角色**: Architect（创建初始任务清单）→ Developer（执行并更新）
+- **输入**: `docs/02_architecture.md`、`docs/04_api.md`、`docs/05_ui.md`
 - **输出**: `docs/06_tasks.md`
 - **规则**: 每个任务必须有明确的验收标准
 - **完成信号**: `docs/06_tasks.md` 有待办任务
-- **门禁**: 软门禁——`docs/02_architecture.md`、`docs/03_database.md`、`docs/04_api.md` 状态"已确认" + 无阻塞项
+- **门禁**: 软门禁——`docs/02_architecture.md`、`docs/03_database.md`、`docs/04_api.md`、`docs/05_ui.md` 状态均"已确认"（`05_ui.md` 可标注"不适用"）+ 无阻塞项
 
 ### 阶段 6: 编码
 
 - **角色**: Developer
-- **输入**: `docs/02_architecture.md`、`docs/04_api.md`、`docs/06_tasks.md`
+- **输入**: `docs/02_architecture.md`、`docs/03_database.md`、`docs/04_api.md`、`docs/05_ui.md`、`docs/06_tasks.md`、`.ai/rules/coding_rules.md`
 - **输出**: `src/`、`tests/`、更新 `docs/06_tasks.md`、`docs/CHANGELOG.md`
 - **规则**: 严格遵循编码规范和架构设计
 - **完成信号**: 代码可编译运行
@@ -70,7 +70,7 @@
 ### 阶段 7: 测试
 
 - **角色**: Tester
-- **输入**: `docs/01_prd.md`、`docs/04_api.md`、`src/`
+- **输入**: `docs/01_prd.md`、`docs/02_architecture.md`、`docs/04_api.md`、`docs/06_tasks.md`、`src/`
 - **输出**: `tests/`、`docs/09_test_report.md`
 - **规则**: 可与阶段 6 交叉进行（TDD）
 - **完成信号**: `docs/09_test_report.md` 状态变为"已确认"
@@ -79,9 +79,19 @@
 ### 阶段 8: 代码审查
 
 - **角色**: Reviewer
-- **输入**: `src/`、`docs/02_architecture.md`
+- **输入**: `src/`、`tests/`、`docs/02_architecture.md`、`docs/04_api.md`、`docs/05_ui.md`、`docs/09_test_report.md`、`.ai/rules/coding_rules.md`
 - **输出**: `docs/08_review.md`
 - **规则**: 严重问题必须修复后才能进入发布
+- **回环流程**（Reviewer 发现 Critical 问题后）：
+  ```
+  Review 发现 Critical 问题
+    → Developer 修复（复用阶段 6 流程，在 06_tasks.md 中创建新任务）
+        — 新任务的依赖关系字段同时引用原任务编号和 08_review.md 中的问题编号
+    → Tester 回归测试（复用阶段 7 流程，更新 09_test_report.md）
+    → Reviewer 重新审查（阶段 8，在 08_review.md 中追加"复审记录"区块，不覆盖原始报告）
+    → 最多循环 2 次，仍不通过则升级为人工决策（记入 07_decisions.md）
+  ```
+- **回环出口条件**：`docs/06_tasks.md` 无"进行中"的修复任务 + `docs/08_review.md` 无 Critical 未修复 + 无阻塞项
 - **完成信号**: `docs/08_review.md` 无 Critical 级别未修复问题
 - **门禁**: 软门禁——`docs/09_test_report.md` 状态"已确认" + 无阻塞项
 
@@ -95,16 +105,38 @@
 
 ---
 
+## 并行协调：Designer 与 Architect 对齐
+
+阶段 3（架构设计）与阶段 4（UI 设计）可并行推进。为避免两边产出不一致，采用以下流程：
+
+```
+Architect 先填充 04_api.md 初稿（API 分组 + 路径前缀，状态"草稿"）
+  → Designer 基于此设计 UI，在 05_ui.md 中标注"本设计假设以下接口存在"
+  → Architect 完成详细 API 设计（填请求/响应结构），04_api.md 走"草稿→评审中→已确认"
+  → Architect 对照 Designer 的假设做确认
+  → 不一致处记入 07_decisions.md
+  → 两边确认后，阶段 5 门禁才放行
+```
+
+说明：
+- 04_api.md 初稿状态为"草稿"时，Designer 参考它属于平行协作行为，不触发门禁检查（Designer 的正式输入只有 01_prd.md）。
+- 04_api.md 必须到"已确认"状态后才能通过阶段 5 门禁。
+- 接口分组清单不单独建文件，直接作为 04_api.md 的阶段性内容。
+
+---
+
 ## 冲突处理流程
 
 当 AI 在工作中发现需求冲突或设计问题时：
 
 ```
 1. 停止当前工作
-2. 在 docs/07_decisions.md 记录问题
-3. 标记任务状态为"已阻塞"
-4. 等待人工确认
-5. 人工确认后继续
+2. 在 docs/07_decisions.md 记录问题（分配 DEC-XXX 编号）
+3. 在 docs/06_tasks.md 状态区块的"阻塞项"字段列出决策编号（如 阻塞项：DEC-XXX（简述，待人工确认））
+4. 标记对应任务状态为"已阻塞"
+5. 等待人工确认
+6. 人工确认决策后，接手 AI 清除 06_tasks.md 阻塞项中对应编号，并在 07_decisions.md 中将该决策标记为"已确认"
+7. 继续工作
 ```
 
 **绝对禁止：AI 自行修改需求或架构文档来解决冲突。**
@@ -120,6 +152,7 @@
 | 想法 → PRD | 硬门禁 | `docs/00_idea.md` 状态"已确认" + 人工确认 |
 | PRD → 架构 | 软门禁 | `docs/01_prd.md` 状态"已确认" + 无阻塞项 |
 | 架构 → 任务 | 软门禁 | `docs/02_architecture.md`、`03_database.md`、`04_api.md` 状态"已确认" + 无阻塞项 |
+| UI → 任务 | 软门禁 | `docs/05_ui.md` 状态"已确认"（或标注"不适用"） + 无阻塞项 |
 | 任务 → 编码 | 软门禁 | `docs/06_tasks.md` 有待办任务 + 无阻塞项 |
 | 编码 → 测试 | 软门禁 | 代码可编译运行 + 无阻塞项 |
 | 测试 → Review | 软门禁 | `docs/09_test_report.md` 状态"已确认" + 无阻塞项 |
@@ -137,6 +170,7 @@
 
 1. 阅读 `README.md` 了解项目背景与当前状态
 2. 检查项目当前状态（`docs/06_tasks.md` 顶部"项目状态"区块）
+   — 校验上游文档是否处于"已确认"状态、阻塞项是否为空；如不满足，必须停下来报错，不得继续
 3. 阅读 `.ai/workflow.md` 了解工作流程
 4. 确认自己的角色 (`.ai/roles/`)
 5. 阅读角色对应的规则 (`.ai/rules/`)
@@ -144,7 +178,7 @@
 7. 阅读 `docs/06_tasks.md` 确认当前任务
 8. 明确输入文档和输出文档
 9. 开始工作
-10. 工作完成后更新对应文档
+10. 工作完成后更新对应文档，并在 `docs/06_tasks.md` 项目状态区块推进当前阶段（更新"当前阶段""下一步行动""阻塞项"三个字段），再通知下个角色接手
 
 **绝对禁止：跳过状态检查直接开工。上游文档未处于"已确认"状态时，不得开始本阶段工作。**
 

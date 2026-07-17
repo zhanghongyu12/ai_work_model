@@ -13,16 +13,15 @@
 
 1. 阅读：
 
-session/context.md
+`.session/{session_id}/context.md`（其中包含"输出目录"字段）
 
-
-2. 不读取discussion.md中的其他专家意见。
-
+2. 不读取 discussion.md 或 expert_b.md 中的其他专家意见。
 
 3. 独立分析。
 
+4. 写入 context.md 指定输出目录下的 `expert_a.md`
 
-4. 写入discussion.md
+   — 若 context.md 缺少"输出目录"字段，报错停止，不得自行猜测路径。
 
 
 ---

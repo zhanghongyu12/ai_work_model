@@ -13,10 +13,19 @@
 
 第一轮：
 
-不要参考Expert A。
+1. 阅读：
 
+`.session/{session_id}/context.md`（其中包含"输出目录"字段）
 
-独立输出观点。
+2. 不要参考 Expert A。
+
+   — 不读取 discussion.md 或 expert_a.md。
+
+3. 独立输出观点。
+
+4. 写入 context.md 指定输出目录下的 `expert_b.md`
+
+   — 若 context.md 缺少"输出目录"字段，报错停止，不得自行猜测路径。
 
 
 ---

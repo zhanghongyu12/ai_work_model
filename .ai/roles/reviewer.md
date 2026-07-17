@@ -25,6 +25,7 @@ tests/                    ← 测试代码
 docs/09_test_report.md    ← 测试报告（确认测试通过）
 docs/02_architecture.md   ← 架构设计（对照标准）
 docs/04_api.md            ← API 设计（对照标准）
+docs/05_ui.md             ← UI 设计（前端实现对照标准）
 .ai/rules/coding_rules.md ← 编码规范
 ```
 
@@ -42,6 +43,7 @@ docs/08_review.md   ← 审查报告
 
 **允许修改：**
 - docs/08_review.md
+- docs/06_tasks.md（项目状态区块）
 
 **禁止：**
 - 直接修改核心代码 (src/)
@@ -57,7 +59,7 @@ docs/08_review.md   ← 审查报告
 4. 安全审计
 5. 性能审查
 6. 撰写 docs/08_review.md 审查报告
-7. 如有严重问题，通知 Developer 角色修复
+7. 如有严重问题，在 docs/08_review.md 中记录问题编号，通知 Developer 角色修复；无严重问题则更新 docs/06_tasks.md 项目状态区块（当前阶段、下一步行动、阻塞项），通知人工确认，由人工确认后转 Developer 进入发布流程
 
 ---
 
