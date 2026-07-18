@@ -66,6 +66,14 @@ docs/08_review.md   ← 审查报告
 5. 性能审查
 6. 撰写 docs/08_review.md 审查报告
 7. 如有严重问题，在 docs/08_review.md 中记录问题编号，通知 Developer 角色修复；无严重问题则更新 docs/06_tasks.md 项目状态区块（当前阶段、下一步行动、阻塞项），通知人工确认，由人工确认后转 Developer 进入发布流程
+ 
+ ## 回环协作
+ 
+ 当发现 Critical 问题需要 Developer 修复时，双方通过协作 session 沟通：
+ - 双向沟通通过 `.session/{session_id}/board.md` 进行，详见 `.ai/rules/coordination_rules.md`
+ - 写入问题清单到 board.md 后，必须输出通知话术（格式见 coordination_rules.md），告知使用人员通知 Developer
+ - Developer 修复后，写入回复消息并输出通知话术，告知使用人员通知 Reviewer 复审
+ - 双方在 board.md 中用"结论"消息确认回环结束
 
 ---
 

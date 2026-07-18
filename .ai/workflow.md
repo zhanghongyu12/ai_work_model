@@ -84,6 +84,9 @@
 - **规则**: 严重问题必须修复后才能进入发布
 - **回环流程**（Reviewer 发现 Critical 问题后）：
   ```
+- **回环流程**（Reviewer 发现 Critical 问题后）：
+  双向沟通通过 `.session/{session_id}/board.md` 进行，详见 `.ai/rules/coordination_rules.md`。
+  ```
   Review 发现 Critical 问题
     → Developer 修复（复用阶段 6 流程，在 06_tasks.md 中创建新任务）
         — 新任务的依赖关系字段同时引用原任务编号和 08_review.md 中的问题编号

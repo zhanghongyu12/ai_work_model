@@ -67,6 +67,9 @@ docs/04_api.md            ← API 设计
 5. 先填充 docs/04_api.md 初稿（API 分组 + 路径前缀，状态"草稿"），供 Designer 参考脚手架
 6. 设计 API 契约详细内容（请求/响应结构），完善 docs/04_api.md
 7. 若 Designer 已完成 05_ui.md 初稿，对照其"本设计假设以下接口存在"做双向确认；不一致记入 docs/07_decisions.md
+    — 双向确认通过 `.session/{session_id}/board.md` 进行，详见 `.ai/rules/coordination_rules.md`
+    — 写入 board.md 消息后，必须输出通知话术（格式见 coordination_rules.md），告知使用人员通知 Designer
+    — 双方对齐后，将结论同步到 docs/07_decisions.md
 8. 将 04_api.md 状态推进为"已确认"
 9. 更新 docs/06_tasks.md 项目状态区块（当前阶段、下一步行动、阻塞项），通知 Developer 角色接手
 

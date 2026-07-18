@@ -46,6 +46,7 @@
 │   ├── rules/             ← 工作规则
 │   │   ├── coding_rules.md
 │   │   ├── git_rules.md
+│   │   ├── coordination_rules.md
 │   │   └── document_rules.md
 │   └── workflow.md        ← 工作流程
 ├── docs/                  ← 项目文档
@@ -157,3 +158,4 @@
 - **不可跳过**：设计阶段不可跳过直接编码
 - **决策留痕**：重要决策记录在 07_decisions.md，避免重复讨论
 - **冲突上报**：AI 发现需求冲突不上自作主张，记录后等待人工确认
+- **角色间协作**：需要双向对话时通过 session board.md 沟通，详见 `.ai/rules/coordination_rules.md`

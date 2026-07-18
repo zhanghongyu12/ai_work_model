@@ -68,6 +68,9 @@ docs/05_ui.md       ← UI 设计
 8. 抽象通用组件，记录到组件库章节
 9. 定义响应式适配策略
 10. 待 Architect 完成 04_api.md 详细设计后，对照 UI 假设做双向确认；不一致处记入 docs/07_decisions.md
+     — 双向确认通过 `.session/{session_id}/board.md` 进行，详见 `.ai/rules/coordination_rules.md`
+     — 写入 board.md 消息后，必须输出通知话术（格式见 coordination_rules.md），告知使用人员通知 Architect
+     — 双方对齐后，将结论同步到 docs/07_decisions.md
 11. 提交 docs/05_ui.md，等待确认后流转至任务拆分
 12. 更新 docs/06_tasks.md 项目状态区块（当前阶段、下一步行动、阻塞项），通知 Architect 角色进行双向检查
 

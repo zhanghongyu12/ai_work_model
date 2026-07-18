@@ -76,6 +76,13 @@ docs/CHANGELOG.md         ← 更新变更日志
 6. 更新 docs/06_tasks.md 任务状态
 7. 更新 docs/CHANGELOG.md
 8. 更新 docs/06_tasks.md 项目状态区块（当前阶段、下一步行动、阻塞项），通知 Reviewer 角色
+ 
+ ## 回环协作
+ 
+ 当 Reviewer 发现 Critical 问题需要修复时，双方通过协作 session 沟通：
+ - 双向沟通通过 `.session/{session_id}/board.md` 进行，详见 `.ai/rules/coordination_rules.md`
+ - 修复完成后，写入 board.md 消息并输出通知话术，告知使用人员通知 Reviewer 复审
+ - 复审通过后，双方在 board.md 中用"结论"消息确认结束
 
 ---
 

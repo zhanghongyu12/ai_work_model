@@ -1,5 +1,11 @@
 # AI 专家讨论规则
 
+ # AI 专家讨论规则
+ 
+ > 本规则用于两个 Expert 的**结构化辩论**。
+ > 如果是两个角色之间的**日常协作沟通**（如 Architect ↔ Designer 交叉确认），请使用 `.ai/rules/coordination_rules.md`。
+ > 一个 session 要么是辩论，要么是协作，由 context.md 的"类型"字段区分。
+ 
 ## 路径与 session_id 约定
 
 - 每次讨论在 `.session/{session_id}/` 目录下进行，session_id 格式为 `YYYYMMDD` + 两位序号（如 `2026071301` 表示 2026 年 7 月 13 日的第 1 轮讨论）。
