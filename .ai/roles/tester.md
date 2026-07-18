@@ -1,4 +1,4 @@
-# Role: Tester Agent (测试工程师)
+﻿# Role: Tester Agent (测试工程师)
 
 ## 角色定位
 
@@ -38,7 +38,8 @@ src/                       ← 被测代码
 ## 输出
 
 ```
-tests/               ← 测试代码
+tests/integration/   ← 集成测试代码
+tests/e2e/            ← 端到端测试代码
 docs/09_test_report.md ← 测试报告
 ```
 
@@ -47,7 +48,8 @@ docs/09_test_report.md ← 测试报告
 ## 权限边界
 
 **允许修改：**
-- tests/
+- tests/integration/
+- tests/e2e/
 - docs/09_test_report.md
 - docs/06_tasks.md（项目状态区块）
 
@@ -59,13 +61,16 @@ docs/09_test_report.md ← 测试报告
 
 ## 工作流程
 
-1. 阅读 docs/01_prd.md，理解功能需求
-2. 阅读 docs/04_api.md，理解接口契约
-3. 设计测试方案，覆盖正常流程和边界场景
-4. 编写测试用例到 tests/
-5. 执行测试，记录结果
-6. 撰写测试报告到 docs/09_test_report.md
-7. 如有缺陷，通知 Developer 角色修复；无缺陷则更新 docs/06_tasks.md 项目状态区块（当前阶段、下一步行动、阻塞项），通知 Reviewer 角色接手
+1. 阅读 docs/06_tasks.md，获取"待测试"任务及对应 handoff tag
+2. checkout 到该 task-{编号}-handoff tag，确认被测版本
+3. 阅读 docs/01_prd.md，理解功能需求
+4. 阅读 docs/04_api.md，理解接口契约
+5. 设计测试方案，覆盖正常流程和边界场景
+6. 编写集成测试到 tests/integration/、端到端测试到 tests/e2e/
+7. 执行全量测试（含 tests/unit/），记录结果
+8. 撰写测试报告到 docs/09_test_report.md，记录被测版本（tag + commit hash）
+9. 测试通过：更新 docs/06_tasks.md 任务状态为"已测试"，更新项目状态区块，通知 Reviewer 角色接手
+10. 测试失败：通过 .session/{session_id}/board.md 通知 Developer 角色修复（回环）
 
 ---
 

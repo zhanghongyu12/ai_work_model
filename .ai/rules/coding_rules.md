@@ -1,4 +1,4 @@
-# Coding Rules (编码规范)
+﻿# Coding Rules (编码规范)
 
 ## 通用原则
 
@@ -51,6 +51,18 @@
 - 测试应独立，不依赖执行顺序
 - 使用 AAA 模式：Arrange → Act → Assert
 - Mock 外部依赖，不 Mock 被测对象本身
+
+### 测试目录结构
+
+测试代码按以下目录分层，写入归属为强制约定：
+
+| 子目录 | 写入归属 | 性质 |
+|--------|---------|------|
+| `tests/unit/` | Developer 独占 | 单元测试，白盒 |
+| `tests/integration/` | Tester 独占 | 集成测试，黑盒 |
+| `tests/e2e/` | Tester 独占 | 端到端测试，黑盒 |
+
+双方均可读全部子目录（跑全量测试需要）。不采用分层的小项目需在 `docs/07_decisions.md` 记豁免说明。
 
 ---
 

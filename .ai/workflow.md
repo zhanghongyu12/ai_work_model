@@ -1,4 +1,4 @@
-# AI Workflow (工作流程)
+﻿# AI Workflow (工作流程)
 
 ## 总览
 
@@ -70,11 +70,25 @@
 ### 阶段 7: 测试
 
 - **角色**: Tester
-- **输入**: `docs/01_prd.md`、`docs/02_architecture.md`、`docs/04_api.md`、`docs/06_tasks.md`、`src/`
-- **输出**: `tests/`、`docs/09_test_report.md`
-- **规则**: 可与阶段 6 交叉进行（TDD）
+- **输入**: `docs/01_prd.md`、`docs/02_architecture.md`、`docs/04_api.md`、`docs/06_tasks.md`、`src/`、`tests/unit/`
+- **输出**: `tests/integration/`、`tests/e2e/`、`docs/09_test_report.md`
+- **规则**: 可与阶段 6 交叉进行（流水线重叠：Developer 做任务 N+1 时 Tester 测任务 N，单任务时收益为零）
 - **完成信号**: `docs/09_test_report.md` 状态变为"已确认"
-- **门禁**: 软门禁——代码可编译运行 + 无阻塞项
+- **门禁**: 软门禁——Developer 已打 `task-{编号}-handoff` tag + 代码可编译运行 + 无阻塞项
+
+#### Developer↔Tester 交接协议
+
+阶段 6（编码）与阶段 7（测试）可并行推进，通过以下协议协调：
+
+**状态流转**：`待办 → 进行中 → 已完成 → 待测试 → 测试中 → 已测试`
+
+1. Developer 完成实现 + `tests/unit/` 后，将任务标记为"待测试"，打 `task-{编号}-handoff` git tag 并通知 Tester
+2. Tester 接手后 checkout 到该 tag，将任务标记为"测试中"，编写 `tests/integration/` + `tests/e2e/` 并跑全量测试
+3. 测试通过：Tester 将任务标记为"已测试"，出报告（记录被测版本 tag + commit hash），通知 Reviewer
+4. 测试失败：Tester 通过 `.session/{session_id}/board.md` 通知 Developer 修复（回环），Developer 修复后重新打 tag
+
+- 常规交接通过 `docs/06_tasks.md` 状态流转（单向事务）
+- 异常回环通过 `.session/{session_id}/board.md`（复用 coordination_rules.md）
 
 ### 阶段 8: 代码审查
 
@@ -157,7 +171,7 @@ Architect 先填充 04_api.md 初稿（API 分组 + 路径前缀，状态"草稿
 | 架构 → 任务 | 软门禁 | `docs/02_architecture.md`、`03_database.md`、`04_api.md` 状态"已确认" + 无阻塞项 |
 | UI → 任务 | 软门禁 | `docs/05_ui.md` 状态"已确认"（或标注"不适用"） + 无阻塞项 |
 | 任务 → 编码 | 软门禁 | `docs/06_tasks.md` 有待办任务 + 无阻塞项 |
-| 编码 → 测试 | 软门禁 | 代码可编译运行 + 无阻塞项 |
+| 编码 → 测试 | 软门禁 | Developer 已打 handoff tag + 代码可编译运行 + 无阻塞项 |
 | 测试 → Review | 软门禁 | `docs/09_test_report.md` 状态"已确认" + 无阻塞项 |
 | Review → 发布 | 自动化门禁 | 测试全部通过 + `docs/CHANGELOG.md` 已更新 + `docs/08_review.md` 无 Critical 未修复 |
 

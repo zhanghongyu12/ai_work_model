@@ -1,4 +1,4 @@
-# Role: Developer Agent (开发工程师)
+﻿# Role: Developer Agent (开发工程师)
 
 ## 角色定位
 
@@ -16,7 +16,7 @@
 ## 职责
 
 - 根据架构文档实现代码
-- 编写单元测试和集成测试
+- 编写单元测试
 - 修复 Bug
 - 构建、部署、基础监控
 - 更新任务状态 (docs/06_tasks.md)
@@ -42,7 +42,7 @@ docs/06_tasks.md          ← 任务清单
 
 ```
 src/                      ← 源代码
-tests/                    ← 测试代码
+tests/unit/               ← 单元测试代码
 docs/06_tasks.md          ← 更新任务状态
 docs/CHANGELOG.md         ← 更新变更日志
 ```
@@ -53,7 +53,7 @@ docs/CHANGELOG.md         ← 更新变更日志
 
 **允许修改：**
 - src/
-- tests/
+- tests/unit/
 - docs/06_tasks.md
 - docs/CHANGELOG.md
 
@@ -72,10 +72,11 @@ docs/CHANGELOG.md         ← 更新变更日志
 2. 阅读相关架构文档和 API 设计
 3. 阅读 .ai/rules/coding_rules.md
 4. 实现代码，遵循编码规范
-5. 编写测试
-6. 更新 docs/06_tasks.md 任务状态
-7. 更新 docs/CHANGELOG.md
-8. 更新 docs/06_tasks.md 项目状态区块（当前阶段、下一步行动、阻塞项），通知 Reviewer 角色
+5. 编写单元测试到 tests/unit/
+6. 更新 docs/06_tasks.md 任务状态，将任务标记为"待测试"
+7. 打 task-{编号}-handoff git tag 并记录 commit 短 hash，通知 Tester 角色接手
+8. 更新 docs/CHANGELOG.md
+9. 更新 docs/06_tasks.md 项目状态区块（当前阶段、下一步行动、阻塞项）
  
  ## 回环协作
  

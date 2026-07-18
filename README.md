@@ -1,4 +1,4 @@
-# AI Work Model
+﻿# AI Work Model
 
 > AI 原生个人开发模板
 
@@ -63,6 +63,9 @@
 │   └── CHANGELOG.md       ← 变更日志
 ├── src/                   ← 源代码
 ├── tests/                 ← 测试代码
+│   ├── unit/              ← 单元测试（Developer）
+│   ├── integration/       ← 集成测试（Tester）
+│   └── e2e/               ← 端到端测试（Tester）
 └── .gitignore
 ```
 
@@ -73,9 +76,9 @@
 | PM (产品经理) | 需求分析、PRD | 00_idea.md, 01_prd.md |
 | Architect (架构师) | 技术方案、系统设计 | 02_architecture.md, 03_database.md, 04_api.md |
 | Designer (设计师) | 界面设计、交互设计 | 05_ui.md |
-| Developer (开发) | 编码、测试、修 Bug | src/, tests/, 06_tasks.md |
+| Developer (开发) | 编码、单元测试、修 Bug | src/, tests/unit/, 06_tasks.md |
 | Reviewer (审查) | 代码质量审查 | 08_review.md |
-| Tester (测试) | 测试方案、用例 | tests/, 09_test_report.md |
+| Tester (测试) | 集成/端到端测试、用例 | tests/integration/, tests/e2e/, 09_test_report.md |
 
 ## 工作流程
 
@@ -150,6 +153,34 @@
 
 > **选型建议**：如果全程只用一个模型，DeepSeek-V4 编码 + 推理 + 长上下文兼顾，可跑完全流程；Review 阶段临时调 GLM-5.1 做关键审查即可。
 > **双模型交叉审查**：配合 `.ai/rules/ExpertDebate` 机制，用 GLM-5.1 + DeepSeek-V4 分别审查，取交集问题必修，单模型独有作为参考项。
+
+## 双窗口分工：Developer + Tester 并行
+
+本模板支持开两个窗口，一个扮 Developer、一个扮 Tester，并行推进编码与测试。
+
+### 使用方式
+
+1. 窗口 A 扮 Developer，窗口 B 扮 Tester，共享同一仓库
+2. 默认 Developer 先行：A 实现 + 写 `tests/unit/` → 交付打 `task-{编号}-handoff` tag → B 接手写 `tests/integration/` + `tests/e2e/` → 出报告
+3. 并行 = 流水线重叠：A 做任务 N+1 时 B 测任务 N，单任务时收益为零
+4. 测试目录分层：`tests/unit/` 归 Developer，`tests/integration/` + `tests/e2e/` 归 Tester（详见 `.ai/rules/coding_rules.md`）
+
+### 共享 git 工作区风险提示
+
+两窗口共享同一仓库时，git 操作可能互相阻塞（如同时 checkout 不同 tag）。建议：
+- 错开提交时间，或使用 `git worktree` 为 Tester 创建独立工作目录
+- Developer 交付打 tag 后通知 Tester，Tester 在自己的 worktree 中 checkout 该 tag 测试
+
+### 提升测试互补的可选机制
+
+分工结构本身保证三层测试都有人写（Developer 写 unit，Tester 写 integration + e2e）。
+如果项目觉得双方视角仍有盲区，可按需从以下机制中挑选几条加上去，不强制：
+
+1. **实现边界说明**：Developer 交付时附 3-5 行"已处理/已知不覆盖/风险点"，Tester 据此精准补测。投入产出比最高，建议优先加这条。
+2. **交叉阅读**：双方写完各自测试后互读对方测试，在 `docs/06_tasks.md` 追加"补充测试建议"。
+3. **覆盖率软阈值**：报告含行+分支覆盖率，低于 80% 需列具体未覆盖文件，下降触发警告，禁硬门槛。
+4. **契约派生**（有 API 且 `04_api.md` 结构化时）：Developer 和 Tester 各自对照同一份结构化契约工作，漏了契约点测试自动红。
+5. **验收点清单 + 变异测试**：高可靠性项目 opt-in，Tester 前置产清单 + 变异测试发现弱断言。
 
 ## 核心原则
 
