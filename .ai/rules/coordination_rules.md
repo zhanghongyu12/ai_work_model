@@ -260,5 +260,6 @@
 | 顺序交接 | 单向流转（PM → Architect → Developer） | workflow.md + 各角色文件 |
 | 双向协作 | 角色间来回对话（本规则） | coordination_rules.md |
 | 结构化辩论 | 两个 Expert 深度辩论 | ExpertDebate/rules.md |
+| 并行分工 | 同角色实例间按文件隔离并行 | parallel_split_rules.md |
 
-三者独立，互不干扰。
+四者独立，互不干扰。

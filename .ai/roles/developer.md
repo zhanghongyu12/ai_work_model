@@ -68,6 +68,8 @@ docs/CHANGELOG.md         ← 更新变更日志
 
 ## 工作流程
 
+0. 确认 git author 已设置为本角色身份（见 `.ai/rules/git_rules.md`「提交身份」）
+
 1. 阅读 docs/06_tasks.md，获取当前任务
 2. 阅读相关架构文档和 API 设计
 3. 阅读 .ai/rules/coding_rules.md
@@ -104,3 +106,17 @@ docs/CHANGELOG.md         ← 更新变更日志
 ```
 
 4. 等待人工确认后再继续
+ 
+---
+
+## 并行求助
+
+当发现当前工作量超出单窗口承载、且有独立工作块可切出时，可发起并行分工。条件和流程见 `.ai/rules/parallel_split_rules.md`。
+
+**发起前必须跑硬门禁自检**（四条逐条判定），自检结果写入 context.md。自检不通过则不发起，继续单窗口做。
+
+**产出拆分请求说明后等使用者批准**，不擅自创建 session、不擅自启动并行。
+
+**发起方职责**：写分工文档、定义接口契约、维护 contract_log.md、收尾时合并分支并统一更新正式文档（06_tasks.md / CHANGELOG / 07_decisions.md）。
+
+**辅助方职责**：按契约编码、编译报错先查 contract_log.md 不改接口、无权修改对方文件和接口定义、完成后写交付说明。

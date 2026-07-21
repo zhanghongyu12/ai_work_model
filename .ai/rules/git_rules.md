@@ -1,5 +1,42 @@
 # Git Rules (Git 协作规则)
 
+---
+
+## 提交身份
+
+每个角色开工前必须设置自己的 git author，使 `git log` 中每个 commit 都能追溯到角色和操作者。
+
+### 格式
+
+- `user.name = {角色}-{git用户名}`
+- `user.email = {角色}-{git用户名}@{项目域名}`
+- 项目域名取项目名小写 + `.local`（如 `ai-work-model.local`），可在 `docs/07_decisions.md` 中覆盖
+- git 用户名从本地 git 配置读取（`git config user.name` 的原始值），如未配置则提示人工先设置基础 git 身份
+
+### 角色对照表
+
+| 角色 | user.name | user.email |
+|------|-----------|------------|
+| PM | PM-{git用户名} | pm-{git用户名}@{项目域名} |
+| Architect | Architect-{git用户名} | architect-{git用户名}@{项目域名} |
+| Designer | Designer-{git用户名} | designer-{git用户名}@{项目域名} |
+| Developer | Developer-{git用户名} | developer-{git用户名}@{项目域名} |
+| Reviewer | Reviewer-{git用户名} | reviewer-{git用户名}@{项目域名} |
+| Tester | Tester-{git用户名} | tester-{git用户名}@{项目域名} |
+
+### 并行分工时的实例标识
+
+并行分工中，同角色多实例在 `user.name` 和 `user.email` 中加实例后缀：
+
+- 发起方：`Developer-{git用户名}-A` / `developer-{git用户名}-a@{项目域名}`
+- 辅助方：`Developer-{git用户名}-B` / `developer-{git用户名}-b@{项目域名}`
+
+详见 `.ai/rules/parallel_split_rules.md`。
+
+### 设置时机
+
+每个角色开工前（工作流程第一步）确认 `git config user.name` 和 `git config user.email` 已设置为本角色身份。如已设置且正确则跳过。
+
 ## 分支策略
 
 ### 分支模型

@@ -61,6 +61,8 @@ docs/09_test_report.md ← 测试报告
 
 ## 工作流程
 
+0. 确认 git author 已设置为本角色身份（见 `.ai/rules/git_rules.md`「提交身份」）
+
 1. 阅读 docs/06_tasks.md，获取"待测试"任务及对应 handoff tag
 2. checkout 到该 task-{编号}-handoff tag，确认被测版本
 3. 阅读 docs/01_prd.md，理解功能需求
@@ -111,3 +113,9 @@ docs/09_test_report.md ← 测试报告
 6. 已知问题
 7. 结论（通过/不通过）
 ```
+
+---
+
+## 并行求助
+
+该角色可发起并行分工，条件与流程见 `.ai/rules/parallel_split_rules.md`。

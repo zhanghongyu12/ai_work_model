@@ -60,6 +60,8 @@ docs/04_api.md            ← API 设计
 
 ## 工作流程
 
+0. 确认 git author 已设置为本角色身份（见 `.ai/rules/git_rules.md`「提交身份」）
+
 1. 阅读 docs/01_prd.md
 2. 评估技术选型，记录决策到 docs/07_decisions.md
 3. 设计系统架构，撰写 docs/02_architecture.md
@@ -88,3 +90,9 @@ docs/04_api.md            ← API 设计
 6. 安全设计
 7. 性能考量
 ```
+
+---
+
+## 并行求助
+
+该角色可发起并行分工，条件与流程见 `.ai/rules/parallel_split_rules.md`。

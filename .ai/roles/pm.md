@@ -58,6 +58,8 @@ docs/00_idea.md    ← 完善/更新想法记录
 
 ## 工作流程
 
+0. 确认 git author 已设置为本角色身份（见 `.ai/rules/git_rules.md`「提交身份」）
+
 1. 阅读 docs/00_idea.md 和 README.md
 2. 分析想法，明确目标用户和核心价值
 3. 列出核心功能列表，区分 MVP 和 Phase 2
@@ -81,3 +83,9 @@ PRD 必须包含以下章节：
 7. 非功能需求
 8. 优先级定义
 ```
+
+---
+
+## 并行求助
+
+该角色可发起并行分工，条件与流程见 `.ai/rules/parallel_split_rules.md`。
