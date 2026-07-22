@@ -73,6 +73,45 @@ hotfix/*      ← 紧急修复分支，从 main 拉出
 
 ---
 
+## 禁止操作
+
+以下操作对未提交改动是**不可逆**的，一旦执行无法恢复，严禁使用：
+
+| 禁止操作 | 替代做法 |
+|---------|---------|
+| `git checkout HEAD -- <file>` 清理工作区 | `git stash`（可恢复） |
+| `git reset --hard` 丢弃未提交改动 | `git stash` 或 `git reset --soft` |
+| `git clean -fd` 清理未跟踪文件 | 先 `git status` 确认无他人改动，再谨慎执行 |
+| `git branch -D` 强删分支 | 正常合并后 `git branch -d` |
+
+通用原则：对非自己归属的文件执行任何 git 写操作前，先 `git status` 确认该文件无未提交改动。
+
+---
+
+## Worktree 用法
+
+并行分工中使用 `git worktree` 创建独立工作空间，实现物理隔离：
+
+```powershell
+# 创建并行工作空间（在项目根目录执行）
+git worktree add ../{项目名}-b feature/{协作名}-b
+
+# 收尾后清理
+git worktree remove ../{项目名}-b
+
+# 查看所有 worktree
+git worktree list
+```
+
+特点：
+- 不同物理目录 checkout 不同分支，工作区完全隔离
+- 共享同一 `.git` 仓库，两路 commit 互相即时可见，无需 push/pull
+- 未提交改动物理隔离，不会被对方操作误伤
+
+详见 `.ai/rules/parallel_split_rules.md`。
+
+---
+
 ## 合并规则
 
 - 合并前确保分支与目标分支同步
