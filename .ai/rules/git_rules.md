@@ -23,6 +23,7 @@
 | Developer | Developer-{git用户名} | developer-{git用户名}@{项目域名} |
 | Reviewer | Reviewer-{git用户名} | reviewer-{git用户名}@{项目域名} |
 | Tester | Tester-{git用户名} | tester-{git用户名}@{项目域名} |
+| Coordinator | Coordinator-{git用户名} | coordinator-{git用户名}@{项目域名} |
 
 ### 并行分工时的实例标识
 
@@ -36,6 +37,10 @@
 ### 设置时机
 
 每个角色开工前（工作流程第一步）确认 `git config user.name` 和 `git config user.email` 已设置为本角色身份。如已设置且正确则跳过。
+
+### Coordinator 身份用途
+
+Coordinator 身份**仅用于集成 merge / tag commit**（编排层动作）。业务 commit（src/tests 的实现提交）由各角色用自己的身份完成，不用 Coordinator 身份。详见 `.ai/rules/orchestrator_rules.md` §8。
 
 ## 分支策略
 
@@ -71,6 +76,14 @@ hotfix/*      ← 紧急修复分支，从 main 拉出
 - 不要提交调试代码（console.log, print 调试等）
 - 不要提交敏感信息（密钥、密码、配置中的真实凭据）
 
+### 编排模式下的提交
+
+- 角色做完工作 `git add` 暂存，**不自行 commit**，返回请求编排者批准
+- 编排者审 `git diff --cached`（全文），批准后角色用自己身份 `git commit`
+- 集成 merge 由编排者用 Coordinator 身份执行（`--no-ff`）
+- push 是重大决策，编排者申请、用户批准后执行；阶段末批量 push
+- 详见 `.ai/rules/orchestrator_rules.md` §8
+
 ---
 
 ## 禁止操作
@@ -80,7 +93,7 @@ hotfix/*      ← 紧急修复分支，从 main 拉出
 | 禁止操作 | 替代做法 |
 |---------|---------|
 | `git checkout HEAD -- <file>` 清理工作区 | `git stash`（可恢复） |
-| `git reset --hard` 丢弃未提交改动 | `git stash` 或 `git reset --soft` |
+| `git reset --hard` 丢弃未提交改动 | `git stash` 或 `git reset --soft`（撤 commit 保留暂存，编排者回滚越界 commit 时用） |
 | `git clean -fd` 清理未跟踪文件 | 先 `git status` 确认无他人改动，再谨慎执行 |
 | `git branch -D` 强删分支 | 正常合并后 `git branch -d` |
 
